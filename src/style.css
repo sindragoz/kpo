@@ -1,0 +1,324 @@
+/*-------------------------------------------------------------*/
+/*-----------------------------HTML-OPTIONS-----------------------*/
+/*-------------------------------------------------------------*/
+
+*{
+  box-sizing: border-box;
+  padding:0;
+  margin:0;
+  outline: 0 !important;
+}
+@font-face {
+    font-family: Cubadak; /* Гарнитура шрифта */
+    /*src: url(fonts/pompadur.eot);*/ /* Для IE5-8 */
+    src: local(Cubadak), url(fonts/Cubadak.ttf); /* Для остальных браузеров */
+
+}
+@font-face{
+  font-family: Market-deco;
+  src: local(Market-deco), url(fonts/Market-deco.ttf);
+}
+body{
+  height:100%;
+  min-width: 1280px;
+  position: relative;
+}
+a,a:hover,a:active,a:visited{
+  color:inherit;
+  text-decoration: none;
+}
+html{
+  height: 100%;
+
+}
+.clear{
+  clear: both;
+}
+
+/*-------------------------------------------------------------*/
+/*-----------------------------SEARCH PAGE-----------------------*/
+/*-------------------------------------------------------------*/
+
+#app,#AppContainer,#AppContainer>div,#AppContainer>div>div{
+  height: 100%;
+}
+#SearchPageWrapper{
+  background: url(images/mapbg.jpg) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+}
+
+#header,.SearchWrapper{
+  background: rgba(0,0,0,0.2);
+}
+#header{
+  font-family: Cubadak;
+  padding-top:30px;
+  padding-left:30px;
+  height:15%;
+  text-align: center;
+  font-size: 50px;
+  text-transform: uppercase;
+  color:white;
+  cursor:default;
+}
+
+#header img{
+  width:50px;
+  height:50px;
+  cursor:pointer;
+}
+.searchMapWrapper{
+  height:80%;
+}
+.SearchWrapper{
+  height:25%;
+  width:100%;
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+}
+.SearchContainer>div:first-child{
+  font-family: Cubadak;
+  margin-left: 40px;
+  text-transform: uppercase;
+  color:white;
+  margin-bottom: 20px;
+  font-size: 28px;
+}
+.SearchContainerWrapper{
+  display: flex;
+  align-items: center;
+  height:90%;
+
+}
+.BorderSection{
+  background: #002124; /* Old browsers */
+  background: -moz-linear-gradient(top, #002124 0%, #1f5353 47%, #1f5353 52%, #1f5353 52%, #002124 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #002124 0%,#1f5353 47%,#1f5353 52%,#1f5353 52%,#002124 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #002124 0%,#1f5353 47%,#1f5353 52%,#1f5353 52%,#002124 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#002124', endColorstr='#002124',GradientType=0 );
+  height:10px;
+}
+
+.SearchInputContainer input{
+  padding-left:5px;
+  padding-right:25px;
+  font-size: 18px;
+  line-height: 30px;
+  width:250px;
+  position: relative;
+  border-radius:4px;
+  border:none;
+}
+
+.SearchInputContainer img{
+  position: absolute;
+  width:20px;
+  height:20px;
+  margin-top: 5px;
+  margin-left:-20px;
+}
+
+.SearchInputContainer {
+  height:30px;
+  margin-left: 40px;
+  padding-right: 3px;
+  vertical-align: middle;
+  white-space: nowrap;
+  position: relative;
+  background:white;
+  border-radius:4px;
+}
+.SearchResultsList{
+  display: block;
+  float:right;
+  width: 100%;
+  height: 90%;
+  margin-top:20px;
+}
+
+.SearchResultsList li{
+  display: inline-block;
+  line-height:25px;
+  font-size: 14px;
+  cursor:pointer;
+  float: right;
+  height: 100%;
+  align-items: center;
+  color:white;
+
+  padding: 20px;
+  font-family: Market-deco;
+  font-size: 16px;
+  max-width:150px;
+  transform: skewX(-20deg);
+  margin-right:30px;
+  background: #000000;
+  border-left: 5px solid white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.75);
+}
+
+.SearchResultsList li:hover{
+  margin-top: -10px;
+  box-shadow: 0 0 10px rgba(255,255,255,0.5);
+  transition: margin-top  ease-out 0.25s;
+}
+.SearchResultsList li:nth-child(1){
+  background: #061a1b;
+  margin-right:80px;
+}
+.SearchResultsList li:nth-child(2){
+  background: #082626;
+}
+.SearchResultsList li:nth-child(3){
+  background: #0e3636;
+}
+.SearchResultsList li:nth-child(4){
+  background: #124c4d;
+}
+.SearchResultsList li:nth-child(5){
+  background: #176162;
+}
+.mapcontainer{
+  background:rgba(0, 0, 0, 0);
+  text-align: center;
+  padding: 5% 0;
+  height:75%;
+  background: url(images/mapcontbg.png) repeat center center;
+
+}
+.map{
+  width:50%;
+  display:inline-block;
+}
+.mapTooltip{
+  display:none!important;
+}
+.zoomButton{
+  display: none;
+}
+
+/*-------------------------------------------------------------*/
+/*-----------------------------CITY PAGE-----------------------*/
+/*-------------------------------------------------------------*/
+.cityHeader{
+  font-family: Market-deco;
+  height:80px;
+  text-align: center;
+  font-size: 50px;
+  text-transform: uppercase;
+}
+.cityHeader p{
+  margin-top:10px;
+  background: white;
+  display:inline-block;
+  height:80px;
+  border-bottom: 5px solid black;
+}
+.cityHeader img{
+
+  padding-top:5px;
+  height:60px;
+  width:55px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+#CityPageWrapper{
+    font-family: Market-deco;
+}
+.CityInfoContainer{
+  padding:50px 150px;
+  display: flex;
+  justify-content:space-evenly;
+}
+.CityPhoto,.CityPrimaryInfoContainer{
+  height:750px;
+  background-color: rgba(245,245,245,0.8);
+}
+.CityPhoto {
+  position: relative;
+  width:750px;
+  margin-left:100px;
+  padding:50px;
+
+  background-repeat: no-repeat;
+  background-position:center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: 650px 650px;
+  box-shadow:-15px 15px 50px rgba(0,0,0,0.15);
+}
+
+.CityPrimaryInfoContainer{
+  padding:40px 20px;
+  width:300px;
+  min-width:250px;
+  box-shadow:15px 15px 50px rgba(0,0,0,0.15);
+}
+.CityPrimaryInfoContainer h3{
+  text-align: center;
+  margin-bottom: 100px;
+}
+
+.CityPrimaryInfoContainer h4{
+  margin-bottom: 10px;
+  margin-top: 50px;
+}
+.PhotoColorFilter{
+  width:650px;
+  height:650px;
+  background:rgba(0,255,0,0.05);
+}
+#rating{
+  display:table-cell;
+  line-height: 40px;
+  text-align: center;
+  font-size: 35px;
+  width:80px;
+  height:80px;
+  color:white;
+  position: absolute;
+  background: green;
+  top: 60px;
+  right:60px;
+  box-shadow:-5px 5px 10px rgba(0,0,0,0.25);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+#rating div:nth-child(1){
+  font-size: 13px;
+  line-height: 25px;
+}
+
+#city-descr{
+  padding:15px;
+  width:400px;
+  text-align: center;
+  position: absolute;
+  top:200px;
+  left:175px;
+  color:white;
+  background-color: rgba(10,10,10,0.45);
+}
+
+#city-descr h2{
+  margin-bottom:50px;
+}
+#error{
+  text-align: center;
+  font-size: 40px;
+  margin-top: 100px;
+  padding:50px 150px;
+}
+
+#error>div{
+  font-family: monospace;
+  line-height: 100px;
+  box-shadow: 0px 0px 15px -1px rgba(0,0,0,0.25);
+}
