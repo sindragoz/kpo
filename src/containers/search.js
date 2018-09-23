@@ -13,7 +13,6 @@ class SearchComponent extends React.Component {
 
   constructor(props,match){
     super(props,match);
-    console.log(match);
     this.state={value:'',link:'', isEmptyValue:true,selectedCity:{},selectCityEvent:new Event('select'),unselectCityEvent:new Event('unselect')};
   }
 
@@ -42,7 +41,6 @@ class SearchComponent extends React.Component {
                 //$(".mapcontainer").trigger('zoom', zoomOptions);
             });
             $(".mapcontainer").on('unselect', (e)=> {
-              //console.log("DELETE");
               let options = {
   mapOptions: {},             // was updatedOptions
   replaceOptions: false ,      // whether mapsOptions should entirely replace current map options, or just extend it,
@@ -129,8 +127,7 @@ class SearchComponent extends React.Component {
   }
   createCityLink=()=>{
     const link=`${this.props.selectedCity.geoname_id}`;
-    console.log('CITY_LINK');
-    console.log(this.props.selectedCity);
+
     if(link!==this.state.link)
     this.setState({link});
   }

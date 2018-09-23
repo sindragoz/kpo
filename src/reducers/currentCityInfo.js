@@ -14,7 +14,7 @@ export default function CurrentCityInfo(state=[],action){
 			if (action.status=='processing')
 				return {...state,descrStatus:action.status};
 			if(action.status=='success')
-			  return {...state,descr:action.payload.descr,rating:action.payload.rating,descrStatus:action.status};
+			  return {...state,descr:action.payload.descr,rating:action.payload.rating,descrStatus:action.status,scores_out_of_10:action.payload.scores_out_of_10};
 			return {...state,descrStatus:action.status,descrError:action.error};
     case "GET_CITY_PHOTO":
 			if (action.status=='processing')
@@ -29,6 +29,12 @@ export default function CurrentCityInfo(state=[],action){
 			if(action.status=='success')
 				return {...state,details:action.payload,detStatus:action.status};
 			return {...state,detStatus:action.status,detError:action.error};
+			case "GET_CITY_SALARIES":
+				if (action.status=='processing')
+					return {...state,salStatus:action.status};
+				if(action.status=='success')
+					return {...state,salaries:action.payload,salStatus:action.status};
+				return {...state,salStatus:action.status,salError:action.error};
 		default:
 		return state;
 		}

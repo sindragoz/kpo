@@ -34,8 +34,6 @@ export const getCityDetailsLinkAction=(cityid)=>dispatch=>{
     .then(response => {
     dispatch(getCityPrimaryInfoAction(response));
   }).catch(ex=>{
-    console.log('LINK ERROR');
-    console.log(ex);
     dispatch({type:'GET_CITY_DETAILS_LINK',status:'error',error:ex});
   })
 
@@ -46,6 +44,7 @@ export const getCityPrimaryInfoAction=(city)=>dispatch=>{
       dispatch(getCityDescriptionAction(response.data._links));
       dispatch(getCityPhotoAction(response.data._links));
       dispatch(getCityDetailsAction(response.data._links));
+      dispatch(getCitySalariesAction(response.data._links));
       dispatch({type:'GET_CITY_PRIMARY_INFO',status:'success',payload:
       {
         links:response.data._links,
@@ -62,7 +61,7 @@ export const getCityPrimaryInfoAction=(city)=>dispatch=>{
 export const getCityDescriptionAction=(links)=>dispatch=>{
   dispatch({type:"GET_CITY_DESCRIPTION",status:'processing'});
     axios.get(`${links['ua:scores'].href}`).then(response=>{
-      dispatch({type:'GET_CITY_DESCRIPTION',status:'success',payload:{descr:response.data.summary,rating:response.data.teleport_city_score}});
+      dispatch({type:'GET_CITY_DESCRIPTION',status:'success',payload:{descr:response.data.summary,rating:response.data.teleport_city_score,scores_out_of_10:response.data.categories}});
     }).catch(ex=>{
       dispatch({type:'GET_CITY_DESCRIPTION',status:'error',error:ex});
     });
@@ -81,5 +80,13 @@ export const getCityDetailsAction=(links)=>dispatch=>{
       dispatch({type:'GET_CITY_DETAILS',status:'success',payload:response.data.categories});
     }).catch(ex=>{
       dispatch({type:'GET_CITY_DETAILS',status:'error',error:ex});
+    });
+}
+export const getCitySalariesAction=(links)=>dispatch=>{
+  dispatch({type:"GET_CITY_SALARIES",status:'processing'});
+    axios.get(`${links['ua:salaries'].href}`).then(response=>{
+      dispatch({type:'GET_CITY_SALARIES',status:'success',payload:response.data.salaries});
+    }).catch(ex=>{
+      dispatch({type:'GET_CITY_SALARIES',status:'error',error:ex});
     });
 }

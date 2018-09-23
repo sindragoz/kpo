@@ -4,7 +4,7 @@ import {getCityDetailsLinkAction,getCityDescriptionAction,getCityPhotoAction,get
 import {connect} from 'react-redux';
 import {Logo} from '../components/logo';
 import {ErrorComponent} from '../components/error';
-
+import ChartsContainer from './chartscontainer';
 class CityInfoComponent extends React.Component {
 
   constructor(props){
@@ -17,24 +17,18 @@ class CityInfoComponent extends React.Component {
     this.props.getCityDetailsLink(this.props.match.params.city_id);
   }
 
-  componentWillReceiveProps(nextProps){
 
-  }
-  componentDidUpdate(){
-
-
-  }
   render() {
-    console.log("RENDER_CITY");
-    console.log(this.props);
     const noData='no data';
-    if(this.props.details&&this.props.descr&&this.props.photo&&this.props.status!=='error'){
+    if(this.props.details&&this.props.descr&&this.props.photo&&this.props.salaries&&this.props.status!=='error'){
       const weather=this.props.details.find(detail => detail.id === 'CLIMATE').data.find(item=>item.id=='WEATHER-TYPE')?
       this.props.details.find(detail => detail.id === 'CLIMATE').data.find(item=>item.id=='WEATHER-TYPE').string_value:noData;
       const currency=this.props.details.find(detail => detail.id === 'ECONOMY').data.find(item=>item.id=='CURRENCY-URBAN-AREA')?
       this.props.details.find(detail => detail.id === 'ECONOMY').data.find(item=>item.id=='CURRENCY-URBAN-AREA').string_value:noData;
       const language=this.props.details.find(detail => detail.id === 'LANGUAGE').data.find(item=>item.id=='SPOKEN-LANGUAGES')?
       this.props.details.find(detail => detail.id === 'LANGUAGE').data.find(item=>item.id=='SPOKEN-LANGUAGES').string_value:noData;
+      const housing=this.props.details.find(detail => detail.id === 'HOUSING').data?
+      this.props.details.find(detail => detail.id === 'HOUSING').data:noData;
     return (
     <div id='CityPageWrapper'>
       <div className='cityHeader'><Logo/></div>
@@ -63,7 +57,9 @@ class CityInfoComponent extends React.Component {
           </div>
         </div>
         <div className='clear'/>
+
     </div>
+    <ChartsContainer data={{salaries:this.props.salaries,scores_out_of_10:this.props.scores_out_of_10,housing:housing}}/>
     </div>
 
   );
@@ -86,14 +82,16 @@ function  mapDispatchToProps(dispatch){
 
 function  mapStateToProps(state){
   return {
-    links:state.CurrentCityInfo.links,
+
     descr:state.CurrentCityInfo.descr,
     rating:state.CurrentCityInfo.rating,
     photo:state.CurrentCityInfo.photo,
     details:state.CurrentCityInfo.details,
     population:state.CurrentCityInfo.population,
     name:state.CurrentCityInfo.name,
-    status:state.CurrentCityInfo.status
+    status:state.CurrentCityInfo.status,
+    salaries:state.CurrentCityInfo.salaries,
+    scores_out_of_10:state.CurrentCityInfo.scores_out_of_10
   }
 }
 

@@ -202,7 +202,7 @@ html{
 }
 
 /*-------------------------------------------------------------*/
-/*-----------------------------CITY PAGE-----------------------*/
+/*-----------------------------CITY PAGE-PRIMARY-----------------------*/
 /*-------------------------------------------------------------*/
 .cityHeader{
   font-family: Market-deco;
@@ -321,4 +321,76 @@ html{
   font-family: monospace;
   line-height: 100px;
   box-shadow: 0px 0px 15px -1px rgba(0,0,0,0.25);
+}
+/*-------------------------------------------------------------*/
+/*-----------------------------CITY PAGE-CHARTS-----------------------*/
+/*-------------------------------------------------------------*/
+#ScoreChartContainer{
+  width:800px;
+}
+#SalaryChartContainer{
+  width:600px;
+}
+.HouseIcon{
+  width:190px;
+  height:150px;
+  margin-bottom: 20px;
+}
+#housing{
+  margin:100px 0;
+  box-shadow: 0px 0px 50px -1px rgba(0,0,0,0.25);
+}
+#housing>h2{
+  padding:30px 0;
+}
+#housing>ul{
+  display: flex;
+  justify-content:space-evenly;
+  align-items: center;
+  list-style: none;
+}
+#housing>ul>li{
+  display:inline-block;
+  text-align: center;
+  margin:30px 110px;
+  padding: 15px 60px;
+  border-bottom: 2px solid gray;
+  cursor:default;
+
+}
+#housing>ul>li:first-child{
+  border-left:none;
+}
+#housing>ul>li span{
+color:darkGreen;
+font-weight: bold;
+font-size: 20px;
+line-height: 30px;
+}
+
+#housing>ul>li:hover{
+  transition: background ease-out 0.25s;
+  background:rgba(0,0,0,0.15);
+}
+
+
+.ChartContainer{
+  display: inline-block;
+  width:900px;
+  margin:80px 0;
+  padding:50px 0;
+  text-align: center;
+  box-shadow: 0px 0px 50px -1px rgba(0,0,0,0.25);
+}
+
+.ChartContainer h2{
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+#SalaryChartContainer,#ScoreChartContainer{
+  display: inline-block;
+}
+#AdvancedInfoContainer{
+  text-align: center;
 }
