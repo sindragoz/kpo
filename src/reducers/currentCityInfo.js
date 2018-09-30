@@ -8,7 +8,7 @@ export default function CurrentCityInfo(state=[],action){
 			if (action.status=='processing')
 				return {...state,infoStatus:action.status};
 			if(action.status=='success')
-				return {...state,name:action.payload.name,population:action.payload.population, infoStatus:action.status};
+				return {...state,name:action.payload.name,population:action.payload.population,country:action.payload.country,latlon: action.payload.latlon,infoStatus:action.status};
 			return {...state,infoStatus:action.status,infoError:action.error};
     case "GET_CITY_DESCRIPTION":
 			if (action.status=='processing')
@@ -35,6 +35,12 @@ export default function CurrentCityInfo(state=[],action){
 				if(action.status=='success')
 					return {...state,salaries:action.payload,salStatus:action.status};
 				return {...state,salStatus:action.status,salError:action.error};
+			case "GET_NEARBY_CITIES":
+				if (action.status=='processing')
+					return {...state,nbStatus:action.status};
+				if(action.status=='success')
+					return {...state,salaries:action.payload,nbStatus:action.status};
+				return {...state,nbStatus:action.status,nbError:action.error};
 		default:
 		return state;
 		}

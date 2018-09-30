@@ -36,6 +36,8 @@ class CityInfoComponent extends React.Component {
         <div className='CityPrimaryInfoContainer'>
           <h3>Primary information</h3>
           <div>
+          <h4>Country:</h4>
+          {this.props.country}
           <h4>Population:</h4>
           {this.props.population}
           <h4>Language:</h4>
@@ -82,7 +84,7 @@ function  mapDispatchToProps(dispatch){
 
 function  mapStateToProps(state){
   return {
-
+    country:state.CurrentCityInfo.country,
     descr:state.CurrentCityInfo.descr,
     rating:state.CurrentCityInfo.rating,
     photo:state.CurrentCityInfo.photo,

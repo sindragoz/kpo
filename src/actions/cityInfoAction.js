@@ -2,6 +2,80 @@ import axios from 'axios';
 import {apiInfo} from '../ApiInfo';
 
 
+export const getContinentsAction=()=>dispatch=>{
+  dispatch({type:"GET_CONTINENTS",status:'processing'});
+  axios.get(`${apiInfo.continents}`)
+    .then(response =>{
+    dispatch({type:'GET_CONTINENTS',status:'success', payload:response.data._links['continent:items']});
+  }).catch(ex=>{
+    dispatch({type:'GET_CONTINENTS',status:'error',error:ex});
+  })
+}
+
+export const clearResultsAction=()=>{
+  return{type:'CLEAR_RESULTS'};
+}
+
+export const getCountriesAction=(href)=>dispatch=>{
+  dispatch({type:"GET_COUNTRIES",status:'processing'});
+  axios.get(`${href}`)
+    .then(response =>{
+    dispatch(getCountriesListAction(response.data._links['continent:countries'].href));
+    dispatch({type:'GET_COUNTRIES',status:'success'});
+  }).catch(ex=>{
+    dispatch({type:'GET_COUNTRIES',status:'error',error:ex});
+  })
+}
+export const getCountriesListAction=(href)=>dispatch=>{
+  axios.get(`${href}`)
+    .then(response =>{
+    dispatch({type:'GET_COUNTRIES_LIST',status:'success', payload:response.data._links['country:items']});
+  }).catch(ex=>{
+    dispatch({type:'GET_COUNTRIES_LIST',status:'error',error:ex});
+  })
+}
+
+export const getAdminDivisionsAction=(href)=>dispatch=>{
+    dispatch({type:"GET_ADMIN_DIVISIONS",status:'processing'});
+  axios.get(`${href}`)
+    .then(response =>{
+    dispatch(getAdminDivisionsListAction(response.data._links['country:admin1_divisions'].href));
+    dispatch({type:'GET_ADMIN_DIVISIONS',status:'success'});
+  }).catch(ex=>{
+    dispatch({type:'GET_ADMIN_DIVISIONS',status:'error',error:ex});
+  })
+}
+
+export const getAdminDivisionsListAction=(href)=>dispatch=>{
+  axios.get(`${href}`)
+    .then(response =>{
+    dispatch({type:'GET_ADMIN_DIVISIONS_LIST',status:'success',payload:response.data._links['a1:items']});
+  }).catch(ex=>{
+    dispatch({type:'GET_ADMIN_DIVISIONS_LIST',status:'error',error:ex});
+  })
+}
+
+export const getCitiesAction=(division)=>dispatch=>{
+  axios.get(`${division.href}`)
+    .then(response =>{
+      dispatch(getCitiesListAction(response.data._links['a1:cities'].href));
+    dispatch({type:'GET_DIVISION_CITIES',status:'success'});
+  }).catch(ex=>{
+    dispatch({type:'GET_DIVISION_CITIES',status:'error',error:ex});
+  })
+}
+
+export const getCitiesListAction=(href)=>dispatch=>{
+  axios.get(`${href}`)
+    .then(response =>{
+      console.log('DIVISION CITIES');
+      console.log(response.data._links['city:items']);
+    dispatch({type:'GET_DIVISION_CITIES_LIST',status:'success',payload:response.data._links['city:items']});
+  }).catch(ex=>{
+    dispatch({type:'GET_DIVISION_CITIES_LIST',status:'error',error:ex});
+  })
+}
+
 export const selectCityAction=(cityItemLink)=>(dispatch)=>{
     // dispatch({type:"GETTING_CITY_INFO"});
     axios.get(cityItemLink)
@@ -47,9 +121,10 @@ export const getCityPrimaryInfoAction=(city)=>dispatch=>{
       dispatch(getCitySalariesAction(response.data._links));
       dispatch({type:'GET_CITY_PRIMARY_INFO',status:'success',payload:
       {
-        links:response.data._links,
+        country:city.data._links['city:country'].name,
         name:city.data.name,
-        population:city.data.population
+        population:city.data.population,
+        latlon:city.data.location.latlon
       }
       });
 

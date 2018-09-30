@@ -1,18 +1,20 @@
 import React from 'react';
-import axios from 'axios';
 import {searchCityAction, getSearchResultsAction,selectCityAction,getSelectedCityInfoAction} from '../actions/cityInfoAction';
 import {connect} from 'react-redux';
 import {CitySearchItem} from '../components/CitySearchItem';
 import $ from 'jquery';
 import mapael from 'jquery-mapael';
 import 'jquery-mapael/js/maps/world_countries.js';
+import AllCities from './allcities';
+
 const image=require('../images/earth.png');
 const searchimg=require('../images/search.png');
 const pointimg=require('../images/point.png');
+
 class SearchComponent extends React.Component {
 
-  constructor(props,match){
-    super(props,match);
+  constructor(props){
+    super(props);
     this.state={value:'',link:'', isEmptyValue:true,selectedCity:{},selectCityEvent:new Event('select'),unselectCityEvent:new Event('unselect')};
   }
 
@@ -101,8 +103,6 @@ class SearchComponent extends React.Component {
   searchCity=(cityName)=>{
     this.props.searchCity(cityName);
     this.props.getSearchResults();
-      //console.log("SEARCH_RESULTS:");
-    //  console.log(this.props.searchResults);
   }
 
   onChangeSearchText(event){
@@ -131,9 +131,12 @@ class SearchComponent extends React.Component {
     if(link!==this.state.link)
     this.setState({link});
   }
+  chooseCityHandle=name=>{
+    this.searchCity(name.name);
+    this.setState({value:name.name});
+    this.setState({isEmptyValue:false});
+  }
   render() {
-    //console.log('this.props.selectedCity');
-    //console.log(this.props.selectedCity);
     return (
     <div className='searchMapWrapper'>
       <div id='mapcont' className='mapcontainer'><div className='map'></div></div>
@@ -143,10 +146,11 @@ class SearchComponent extends React.Component {
         <div className='SearchContainerWrapper'>
         <div className='SearchContainer'>
           <div>search for a city<br/></div>
-        <div className='SearchInputContainer'>
+        <div id='SearchInputContainer'>
 
-          <input type='text' placeholder='city name' value={this.state.value} onChange={this.onChangeSearchText.bind(this)}/>
-          <img src={searchimg}/>
+          <input id='searchInput' type='text' placeholder='city name' value={this.state.value} onChange={this.onChangeSearchText.bind(this)}/>
+          <img src={searchimg}/><br/>
+          <AllCities chooseCityHandle={this.chooseCityHandle}/>
         </div>
       </div>
       <ul className='SearchResultsList'>
@@ -161,19 +165,22 @@ class SearchComponent extends React.Component {
   }
 }
 
+
 function  mapDispatchToProps(dispatch){
   return {
     searchCity:(cityName)=>dispatch(searchCityAction(cityName)),
     getSearchResults:()=>dispatch(getSearchResultsAction()),
     selectCity:(cityLink)=>dispatch(selectCityAction(cityLink)),
-    getSelectedCityInfo:()=>dispatch(getSelectedCityInfoAction())
+    getSelectedCityInfo:()=>dispatch(getSelectedCityInfoAction()),
+
   }
 }
 
 function  mapStateToProps(state){
   return {
     searchResults:state.SearchInfo.searchResults,
-    selectedCity:state.SearchedCityInfo.selectedCity
+    selectedCity:state.SearchedCityInfo.selectedCity,
+
   }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(SearchComponent);
