@@ -1,0 +1,15 @@
+
+*{
+	margin:0;
+	padding:0;
+}
+body{
+	
+}
+
+.main-bg{
+	background:url("../../images/main_bg.jpg")center 100% no-repeat;
+	height:3000px;
+	min-width:1200px;
+background-size: 100% 100%;
+}
